@@ -106,9 +106,15 @@ function getServerUrl(){
 	if(location.href.includes("discordsays.com")){
 		return "wss://1366130123597942795.discordsays.com/.proxy/ws?chat=v2";
 	}
+	if(typeof OWOP_SERVER_URL === 'string' && OWOP_SERVER_URL.length > 0){
+		let url = OWOP_SERVER_URL.replace(/^http/, 'ws');
+		if(!url.includes("?chat=")) url += "?chat=v2";
+		console.log(url);
+		return url;
+	}
 	let url = location.href.replace("http", "ws");
 	if(url.includes("localhost")){
-		url = url.replace(/:(\d+)/, ":13374");
+		url = url.replace(/:(\\d+)/, ":13374");
 	}
 	if(!url.includes("?chat=")) url+="?chat=v2";
 	console.log(url);

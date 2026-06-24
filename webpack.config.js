@@ -148,7 +148,8 @@ module.exports = async env => {
 	}
 
 	config.plugins.push(new webpack.DefinePlugin({
-		'PRODUCTION_BUILD': JSON.stringify(!!env.release)
+		'PRODUCTION_BUILD': JSON.stringify(!!env.release),
+		'OWOP_SERVER_URL': JSON.stringify(process.env.OWOP_SERVER_URL || '')
 	}));
 
 	return config;
